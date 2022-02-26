@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+function realpath() {
+	/usr/bin/python -c "import os,sys; print(os.path.realpath(sys.argv[1]))" "$0";
+}
+
+realpath="$(dirname "$(realpath "$0" || echo "${BASH_SOURCE[0]}")")"
+
+# Import configuration and variables.
+source "$realpath/library/config.sh"
+source "$realpath/library/variables.sh"
+
+# Import helpers.
+for file in $realpath/library/helpers/*.sh; do
+	if [ -f "$file" ]; then
+		source "$file"
+	fi
+done
+
+# Import functions.
+for file in $realpath/library/functions/*.sh; do
+	if [ -f "$file" ]; then
+		source "$file"
+	fi
+done
+
+# Import commands.
+for file in $realpath/library/commands/*.sh; do
+	if [ -f "$file" ]; then
+		source "$file"
+	fi
+done
+
+# Import options.
+source "$realpath/library/options.sh"
+
+# Import lockfile logic.
+source "$realpath/library/lockfile.sh"
+
+user_command=$1
+the_command="command_${user_command}"
+
+if [ "$(type -t ${the_command})" == function ]; then
+	${the_command}
+elif [ -z "${user_command}" ]; then
+	echo "${yellow}Warning:${reset} Please enter a recognised command or run ${bold}${base_command} --help${reset} for guidance."
+else
+	echo "${red}Error:${reset} \"${user_command}\" is not a recognised command. Run ${bold}${base_command} --help${reset} for guidance."
+fi
