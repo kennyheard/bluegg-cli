@@ -1,6 +1,5 @@
 {
 	"name": "bluegg-cli",
-	"version": "0.0.1",
 	"description": "An awesome CLI tool to make development life at Bluegg a breeze! 🚀",
 	"author": "Bluegg",
 	"license": "ISC",
