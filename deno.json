@@ -1,0 +1,13 @@
+{
+	"tasks": {
+		"run": "deno run --no-check main.ts --config deno.json",
+		"format": "deno fmt --config deno.json"
+	},
+	"fmt": {
+		"options": {
+			"useTabs": true,
+			"lineWidth": 100,
+			"indentWidth": 2
+		}
+	}
+}
