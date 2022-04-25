@@ -1,6 +1,6 @@
 {
 	"tasks": {
-		"run": "deno run --no-check main.ts --config deno.json",
+		"run": "deno run --allow-read --allow-write --allow-run --allow-env --config deno.json",
 		"format": "deno fmt --config deno.json"
 	},
 	"fmt": {
